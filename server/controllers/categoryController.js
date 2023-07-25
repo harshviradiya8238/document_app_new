@@ -79,7 +79,7 @@ const updateCategory = asyncHandler(async (req, res) => {
       const data = await Category.find({}).sort({
         createdAt: -1,
       });
-      createSuccessResponse(res, data, 200, "Category Updated");
+      createSuccessResponse(res, result, 200, "Category Updated");
     } else {
       res.status(404);
       throw new Error(`Name is Required`);
@@ -101,111 +101,12 @@ const deleteCategory = asyncHandler(async (req, res) => {
     const updatedCatrgories = await Category.find({}).sort({
       createdAt: -1,
     });
-    createSuccessResponse(res, updatedCatrgories, 200, "Category Deleted  ");
+    createSuccessResponse(res, updatedCatrgories, 200, "Category Deleted");
   } else {
     res.status(404);
     throw new Error(`No Category found`);
   }
 });
-
-// // / @desc    create Sub Categry
-// // @route   POST /api/category/id
-// // @access  Private
-// const createSubCategory = asyncHandler(async (req, res) => {
-//   const { _id } = req.params
-//   const { name } = req.body
-
-//   const parent = await Category.findOne({ _id })
-//   if (parent) {
-//     const createdSubCategory = await Category.findOneAndUpdate(
-//       { _id },
-//       {
-//         $push: {
-//           subCategory: {
-//             name,
-//           },
-//         },
-//       },
-//       {
-//         new: true,
-//       }
-//     )
-//     createSuccessResponse(res, createdSubCategory, 200, "Category Created")
-//   } else {
-//     res.status(400)
-//     throw new Error(`Main Category Not Exist`)
-//   }
-// })
-
-// // @desc    remove Sub Categry
-// // @route   DELETE /api/category/id
-// // @access  Private
-// const updateSubCategory = asyncHandler(async (req, res) => {
-//   const { _id } = req.params
-//   const { subCategoryId } = req.query
-//   const { name } = req.body
-//   const parent = await Category.findOne({ _id })
-//   if (parent) {
-//     const updatedSubCategory = await Category.findOneAndUpdate(
-//       { "subCategory._id": subCategoryId },
-//       {
-//         $set: {
-//           "subCategory.$.name": name,
-//         },
-//       },
-//       {
-//         new: true,
-//       }
-//     )
-//     createSuccessResponse(res, updatedSubCategory, 200, "Category Updated")
-//   } else {
-//     res.status(400)
-//     throw new Error(`Main Category Not Exist`)
-//   }
-// })
-
-// // @desc    remove Sub Categry
-// // @route   DELETE /api/category/id
-// // @access  Private
-// const deleteSubCategory = asyncHandler(async (req, res) => {
-//   const { _id } = req.params
-//   const { subCategoryId } = req.query
-//   const parent = await Category.findOne({ _id })
-//   if (parent) {
-//     const updatedSubCategory = await Category.findOneAndUpdate(
-//       { _id },
-//       {
-//         $pull: {
-//           subCategory: {
-//             _id: subCategoryId,
-//           },
-//         },
-//       },
-//       {
-//         new: true,
-//       }
-//     )
-//     await Product.deleteMany({ subCategory: subCategoryId })
-//     createSuccessResponse(res, updatedSubCategory, 200, "Category Deleted")
-//   } else {
-//     res.status(400)
-//     throw new Error(`Main Category Not Exist`)
-//   }
-// })
-
-// // @desc    get catego;ry details
-// // @route   GET /api/category/id
-// // @access  Private
-// const getCategoryById = asyncHandler(async (req, res) => {
-//   const { _id } = req.params
-//   const parent = await Category.findOne({ _id })
-//   if (parent) {
-//     createSuccessResponse(res, parent, 200)
-//   } else {
-//     res.status(400)
-//     throw new Error(`Main Category Not Exist`)
-//   }
-// })
 
 module.exports = {
   getCategories,

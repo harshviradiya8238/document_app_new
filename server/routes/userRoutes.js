@@ -1,18 +1,4 @@
-const {
-  updateUserProfile,
-  getUserDetails,
-  getUsers,
-  getUserById,
-  login,
-  verifyOTP,
-  updateUserDetails,
-  deleteUserAccount,
-  blockUnBlockUser,
-  addProductToCart,
-  removeProductFromCart,
-  getUserCartDetails,
-  adminLogin,
-} = require("../controllers/userController");
+const { login } = require("../controllers/userController");
 
 const { protect, admin } = require("../middleware/authMiddleware");
 
