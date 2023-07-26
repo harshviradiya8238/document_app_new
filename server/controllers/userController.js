@@ -36,6 +36,19 @@ const login = asyncHandler(async (req, res) => {
     throw new Error("password wrong");
   }
 });
+
+const getUserDetails = asyncHandler(async (req, res) => {
+  // const { _id } = req.user;
+  const _id = req.params.id;
+  const user = await User.findById(_id);
+  if (user) {
+    createSuccessResponse(res, user);
+  } else {
+    res.status(400);
+    throw new Error("User Not Found");
+  }
+});
 module.exports = {
   login,
+  getUserDetails,
 };
